@@ -92,7 +92,7 @@ export default function Navbar({ onMenuToggle }) {
             <Menu size={20} className="pointer-events-none" />
           </button>
           <p className="text-sm font-medium text-slate-500">
-            <span className="hidden sm:inline">Inventory Management</span>
+            <span className="hidden sm:inline">Inventra</span>
           </p>
         </div>
 

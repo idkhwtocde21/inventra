@@ -1,4 +1,4 @@
-import { Package, ShieldCheck, BellRing, BarChart3 } from 'lucide-react'
+import { ShieldCheck, BellRing, BarChart3 } from 'lucide-react'
 
 const features = [
   {
@@ -27,10 +27,8 @@ export default function AuthLayout({ title, subtitle, children, footer }) {
         <div className="absolute left-1/3 top-1/2 h-56 w-56 rounded-full bg-sky-500/20 blur-3xl" />
 
         <div className="relative flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 shadow-lg shadow-blue-600/40">
-            <Package size={24} className="text-white" />
-          </div>
-          <span className="text-xl font-semibold text-white">Inventory System</span>
+          <img src="/inventra_logo.jpg" alt="Inventra" className="h-11 w-11 rounded-xl object-cover shadow-lg" />
+          <span className="text-xl font-semibold text-white">Inventra</span>
         </div>
 
         <div className="relative">
@@ -70,10 +68,8 @@ export default function AuthLayout({ title, subtitle, children, footer }) {
       <div className="flex w-full items-center justify-center px-4 py-8 sm:p-6 lg:w-1/2">
         <div className="w-full max-w-sm">
           <div className="mb-8 flex flex-col items-center lg:hidden">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-600/40 sm:h-14 sm:w-14">
-              <Package size={24} className="text-white sm:size-7" />
-            </div>
-            <span className="text-lg font-semibold text-slate-800 sm:text-xl">Inventory System</span>
+            <img src="/inventra_logo.jpg" alt="Inventra" className="mb-4 h-12 w-12 rounded-2xl object-cover shadow-lg sm:h-14 sm:w-14" />
+            <span className="text-lg font-semibold text-slate-800 sm:text-xl">Inventra</span>
           </div>
 
           <div className="animate-fade-in-up">

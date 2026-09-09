@@ -56,10 +56,8 @@ export default function Sidebar({ open, onClose }) {
         }`}
       >
         <div className="flex items-center gap-3 border-b border-slate-700/50 px-6 py-5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 shadow-sm">
-            <Package size={20} className="text-white" />
-          </div>
-          <span className="text-lg font-semibold">Inventory</span>
+          <img src="/inventra_logo.jpg" alt="Inventra" className="h-9 w-9 rounded-lg object-cover shadow-sm" />
+          <span className="text-lg font-semibold">Inventra</span>
         </div>
 
         <nav className="flex-1 space-y-1 px-3 py-4">
