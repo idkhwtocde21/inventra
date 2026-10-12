@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import Modal from '../ui/Modal.jsx'
 import Button from '../ui/Button.jsx'
+import Logo from '../ui/Logo.jsx'
 
 const nav = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -56,7 +57,7 @@ export default function Sidebar({ open, onClose }) {
         }`}
       >
         <div className="flex items-center gap-3 border-b border-slate-700/50 px-6 py-5">
-          <img src="/inventra_logo.jpg" alt="Inventra" className="h-9 w-9 rounded-lg object-cover shadow-sm" />
+          <Logo size={36} className="text-slate-300" />
           <span className="text-lg font-semibold">Inventra</span>
         </div>
 

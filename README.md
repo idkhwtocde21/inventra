@@ -16,17 +16,18 @@ Track items, categories, stock levels, and low-stock alerts with a clean, respon
 - **Notifications** — Laravel database notifications in a navbar dropdown (polled every 45s), mark-one/mark-all read
 
 ### Low-stock alert rules
+
 - Fires **only on item update** when quantity drops to/below `reorder_level` (not on create)
 - Recipients: users with `role = admin`
 
 ## Tech Stack
 
-| Layer    | Tool |
-|----------|------|
-| Backend  | Laravel 13, MySQL, Laravel Sanctum |
+| Layer    | Tool                                                 |
+| -------- | ---------------------------------------------------- |
+| Backend  | Laravel 13, MySQL, Laravel Sanctum                   |
 | Frontend | React 19, Vite, Tailwind CSS v4, React Router, Axios |
-| Icons    | lucide-react |
-| Toasts   | sonner |
+| Icons    | lucide-react                                         |
+| Toasts   | sonner                                               |
 
 ## Prerequisites
 
@@ -93,8 +94,8 @@ Open **`http://localhost:5173`** (the frontend must hit `localhost`, not `127.0.
 
 ## Demo Accounts
 
-| Role  | Email                 | Password     |
-|-------|-----------------------|--------------|
+| Role  | Email                  | Password      |
+| ----- | ---------------------- | ------------- |
 | Admin | `admin@inventory.test` | `password123` |
 | Admin | `admin@test.com`       | `password123` |
 | Staff | `test@example.com`     | `password`    |
@@ -108,23 +109,23 @@ Open **`http://localhost:5173`** (the frontend must hit `localhost`, not `127.0.
 
 ## API Overview
 
-| Method | Endpoint                    | Description                        |
-|--------|-----------------------------|------------------------------------|
-| POST   | `/api/register`             | Create account (role: staff)       |
-| POST   | `/api/login`                | Sign in                            |
-| POST   | `/api/logout`               | Sign out                           |
-| GET    | `/api/user`                 | Current user                       |
-| GET    | `/api/items`                | List items (search, filter, paginate) |
-| POST   | `/api/items`                | Create item                        |
-| GET    | `/api/items/{item}`         | Show item                          |
-| PUT    | `/api/items/{item}`         | Update item                        |
-| DELETE | `/api/items/{item}`         | Delete item                        |
-| GET    | `/api/categories`           | List categories (with item counts) |
-| POST   | `/api/categories`           | Create category                    |
-| DELETE | `/api/categories/{category}`| Delete category (409 if in use)    |
-| GET    | `/api/notifications`        | List notifications + unread count  |
-| PATCH  | `/api/notifications/{n}/read` | Mark one read                    |
-| PATCH  | `/api/notifications/read-all` | Mark all read                    |
+| Method | Endpoint                      | Description                           |
+| ------ | ----------------------------- | ------------------------------------- |
+| POST   | `/api/register`               | Create account (role: staff)          |
+| POST   | `/api/login`                  | Sign in                               |
+| POST   | `/api/logout`                 | Sign out                              |
+| GET    | `/api/user`                   | Current user                          |
+| GET    | `/api/items`                  | List items (search, filter, paginate) |
+| POST   | `/api/items`                  | Create item                           |
+| GET    | `/api/items/{item}`           | Show item                             |
+| PUT    | `/api/items/{item}`           | Update item                           |
+| DELETE | `/api/items/{item}`           | Delete item                           |
+| GET    | `/api/categories`             | List categories (with item counts)    |
+| POST   | `/api/categories`             | Create category                       |
+| DELETE | `/api/categories/{category}`  | Delete category (409 if in use)       |
+| GET    | `/api/notifications`          | List notifications + unread count     |
+| PATCH  | `/api/notifications/{n}/read` | Mark one read                         |
+| PATCH  | `/api/notifications/read-all` | Mark all read                         |
 
 Item list supports `?search=`, `?category_id=N`, `?low_stock=1`, `?page=N`, `?per_page=N`.
 

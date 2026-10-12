@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Bell, Check, CheckCheck, AlertTriangle, Package, Menu } from 'lucide-react'
 import { useAuth } from '../../hooks/useAuth.js'
 import { notificationService } from '../../services/notificationService.js'
+import Logo from '../ui/Logo.jsx'
 
 function timeAgo(iso) {
   const diff = Date.now() - new Date(iso).getTime()
@@ -91,6 +92,7 @@ export default function Navbar({ onMenuToggle }) {
           >
             <Menu size={20} className="pointer-events-none" />
           </button>
+          <Logo size={22} className="text-slate-700" />
           <p className="text-sm font-medium text-slate-500">
             <span className="hidden sm:inline">Inventra</span>
           </p>

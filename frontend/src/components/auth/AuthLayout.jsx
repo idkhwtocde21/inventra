@@ -1,4 +1,5 @@
 import { ShieldCheck, BellRing, BarChart3 } from 'lucide-react'
+import Logo from '../ui/Logo.jsx'
 
 const features = [
   {
@@ -27,7 +28,7 @@ export default function AuthLayout({ title, subtitle, children, footer }) {
         <div className="absolute left-1/3 top-1/2 h-56 w-56 rounded-full bg-sky-500/20 blur-3xl" />
 
         <div className="relative flex items-center gap-3">
-          <img src="/inventra_logo.jpg" alt="Inventra" className="h-11 w-11 rounded-xl object-cover shadow-lg" />
+          <Logo size={44} className="text-slate-300" />
           <span className="text-xl font-semibold text-white">Inventra</span>
         </div>
 
@@ -68,7 +69,7 @@ export default function AuthLayout({ title, subtitle, children, footer }) {
       <div className="flex w-full items-center justify-center px-4 py-8 sm:p-6 lg:w-1/2">
         <div className="w-full max-w-sm">
           <div className="mb-8 flex flex-col items-center lg:hidden">
-            <img src="/inventra_logo.jpg" alt="Inventra" className="mb-4 h-12 w-12 rounded-2xl object-cover shadow-lg sm:h-14 sm:w-14" />
+            <Logo size={52} className="mb-4 text-slate-700" />
             <span className="text-lg font-semibold text-slate-800 sm:text-xl">Inventra</span>
           </div>
 
