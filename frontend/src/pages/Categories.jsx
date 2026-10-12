@@ -6,10 +6,14 @@ import Button from '../components/ui/Button.jsx'
 import Modal from '../components/ui/Modal.jsx'
 import Alert from '../components/ui/Alert.jsx'
 
+const suggestPrefix = (name) =>
+  name.replace(/[^A-Za-z]/g, '').toUpperCase().slice(0, 4)
+
 export default function Categories() {
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
   const [newName, setNewName] = useState('')
+  const [newPrefix, setNewPrefix] = useState('')
   const [creating, setCreating] = useState(false)
   const [showCreate, setShowCreate] = useState(false)
   const [formErrors, setFormErrors] = useState([])
@@ -37,12 +41,17 @@ export default function Categories() {
       setFormErrors(['Category name is required'])
       return
     }
+    if (!newPrefix.trim()) {
+      setFormErrors(['Category prefix is required'])
+      return
+    }
     setCreating(true)
     setFormErrors([])
     try {
-      await categoryService.createCategory(newName.trim())
+      await categoryService.createCategory({ name: newName.trim(), prefix: newPrefix.trim().toUpperCase() })
       toast.success('Category added successfully')
       setNewName('')
+      setNewPrefix('')
       setShowCreate(false)
       load()
     } catch (err) {
@@ -77,7 +86,7 @@ export default function Categories() {
           <h1 className="text-xl font-bold text-slate-800 sm:text-2xl">Categories</h1>
           <p className="mt-1 text-sm text-slate-500">Organize your items into categories</p>
         </div>
-        <Button onClick={() => { setShowCreate(true); setFormErrors([]) }}>
+        <Button onClick={() => { setShowCreate(true); setFormErrors([]); setNewName(''); setNewPrefix('') }}>
           <Plus size={16} />
           Add Category
         </Button>
@@ -91,6 +100,7 @@ export default function Categories() {
           <thead>
             <tr className="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
               <th className="px-4 py-3 font-semibold">Name</th>
+              <th className="px-4 py-3 font-semibold">Prefix</th>
               <th className="px-4 py-3 font-semibold">Items</th>
               <th className="px-4 py-3 text-right font-semibold">Actions</th>
             </tr>
@@ -103,6 +113,9 @@ export default function Categories() {
                     <div className="h-3 w-40 rounded bg-slate-200" />
                   </td>
                   <td className="px-4 py-3">
+                    <div className="h-3 w-12 rounded bg-slate-200" />
+                  </td>
+                  <td className="px-4 py-3">
                     <div className="h-3 w-10 rounded bg-slate-200" />
                   </td>
                   <td className="px-4 py-3">
@@ -112,7 +125,7 @@ export default function Categories() {
               ))
             ) : categories.length === 0 ? (
               <tr>
-                <td colSpan={3} className="px-4 py-14 text-center">
+                <td colSpan={4} className="px-4 py-14 text-center">
                   <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
                     <Tag size={22} className="text-slate-400" />
                   </div>
@@ -132,10 +145,19 @@ export default function Categories() {
                       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
                         <Tag size={15} />
                       </div>
-                      <span className="font-medium text-slate-800">{c.name}</span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3">
+                       <span className="font-medium text-slate-800">{c.name}</span>
+                     </div>
+                   </td>
+                   <td className="px-4 py-3">
+                     {c.prefix ? (
+                       <span className="rounded-md bg-slate-100 px-2 py-1 font-mono text-xs font-semibold text-slate-600">
+                         {c.prefix}
+                       </span>
+                     ) : (
+                       <span className="text-xs text-slate-400">—</span>
+                     )}
+                   </td>
+                   <td className="px-4 py-3">
                     <span
                       className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${
                         c.items_count > 0 ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-500'
@@ -176,10 +198,25 @@ export default function Categories() {
             <input
               required
               value={newName}
-              onChange={(e) => setNewName(e.target.value)}
+              onChange={(e) => {
+                setNewName(e.target.value)
+                setNewPrefix(suggestPrefix(e.target.value))
+              }}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
               placeholder="Category name"
             />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-slate-700">Prefix</label>
+            <input
+              required
+              value={newPrefix}
+              onChange={(e) => setNewPrefix(e.target.value.toUpperCase().replace(/[^A-Z]/g, ''))}
+              maxLength={10}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 font-mono text-sm uppercase focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              placeholder="e.g. ELEC"
+            />
+            <p className="mt-1 text-xs text-slate-400">Used to auto-generate item SKUs, e.g. {newPrefix || 'ELEC'}-001.</p>
           </div>
           <div className="flex justify-end gap-2">
             <Button variant="secondary" onClick={() => setShowCreate(false)}>

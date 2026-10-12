@@ -34,9 +34,9 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        $electronics = Category::firstOrCreate(['name' => 'Electronics']);
-        $office = Category::firstOrCreate(['name' => 'Office Supplies']);
-        $warehouse = Category::firstOrCreate(['name' => 'Warehouse']);
+        $electronics = Category::updateOrCreate(['name' => 'Electronics'], ['prefix' => 'ELEC']);
+        $office = Category::updateOrCreate(['name' => 'Office Supplies'], ['prefix' => 'OFF']);
+        $warehouse = Category::updateOrCreate(['name' => 'Warehouse'], ['prefix' => 'WRH']);
 
         $demoItems = [
             ['name' => 'USB-C Cable', 'sku' => 'ELEC-001', 'category_id' => $electronics->id, 'quantity' => 120, 'unit_price' => 8.99, 'reorder_level' => 20],

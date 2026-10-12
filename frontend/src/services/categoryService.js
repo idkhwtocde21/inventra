@@ -6,8 +6,8 @@ export const categoryService = {
     return data
   },
 
-  async createCategory(name) {
-    const { data } = await api.post('/api/categories', { name })
+  async createCategory({ name, prefix }) {
+    const { data } = await api.post('/api/categories', { name, prefix })
     return data
   },
 

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Notifications\LowStockNotification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
@@ -37,7 +38,14 @@ class ItemController extends Controller
 
     public function store(StoreItemRequest $request): JsonResponse
     {
-        $item = Item::create($request->validated());
+        $item = retry(3, function () use ($request) {
+            return DB::transaction(function () use ($request) {
+                $data = $request->validated();
+                $data['sku'] = Item::generateSku($data['category_id']);
+
+                return Item::create($data);
+            });
+        }, 50);
 
         return response()->json($item->load('category'), 201);
     }

@@ -19,7 +19,6 @@ class UpdateItemRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'sku' => ['required', 'string', 'max:255', 'unique:items,sku,' . $this->item?->id],
             'category_id' => ['required', 'integer', 'exists:categories,id'],
             'quantity' => ['required', 'integer', 'min:0'],
             'unit_price' => ['required', 'numeric', 'min:0'],

@@ -12,6 +12,13 @@ class CategoryRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('prefix')) {
+            $this->merge(['prefix' => strtoupper(trim((string) $this->input('prefix')))]);
+        }
+    }
+
     /**
      * @return array<string, ValidationRule|array<mixed>|string>
      */
@@ -19,6 +26,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', 'unique:categories'],
+            'prefix' => ['required', 'string', 'max:10', 'alpha:ascii', 'unique:categories'],
         ];
     }
 }

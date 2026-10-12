@@ -10,7 +10,6 @@ import Alert from '../components/ui/Alert.jsx'
 
 const emptyForm = {
   name: '',
-  sku: '',
   category_id: '',
   quantity: 0,
   unit_price: '',
@@ -71,7 +70,6 @@ export default function Inventory() {
     setEditing(item)
     setForm({
       name: item.name,
-      sku: item.sku,
       category_id: item.category_id,
       quantity: item.quantity,
       unit_price: item.unit_price,
@@ -84,7 +82,6 @@ export default function Inventory() {
   const validateForm = () => {
     const errs = []
     if (!form.name.trim()) errs.push('Name is required')
-    if (!form.sku.trim()) errs.push('SKU is required')
     if (!form.category_id) errs.push('Please select a category')
     const num = (v) => (v === '' || v === null || Number.isNaN(Number(v)))
     if (num(form.quantity)) errs.push('Quantity must be a number')
@@ -352,15 +349,6 @@ export default function Inventory() {
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">SKU</label>
-            <input
-              required
-              value={form.sku}
-              onChange={(e) => setForm({ ...form, sku: e.target.value })}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-            />
-          </div>
-          <div>
             <label className="mb-1 block text-sm font-medium text-slate-700">Category</label>
             <select
               required
@@ -375,6 +363,9 @@ export default function Inventory() {
                 </option>
               ))}
             </select>
+            <p className="mt-1 text-xs text-slate-400">
+              {editing ? 'SKU is fixed once an item is created.' : 'SKU is generated automatically from the category (e.g. ELEC-001).'}
+            </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
